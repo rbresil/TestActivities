@@ -63,6 +63,27 @@ public class ThirdActivity extends Activity {
 
     }
 
+    public void onclickButton4(View view) {
+
+        Log.d(TAG, "onclickButton4: calling Map");
+
+//        Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194");
+//        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//        mapIntent.setPackage("com.google.android.apps.maps");
+//        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+//
+//            Log.d(TAG, "onclickButton4: calling San Francisco Map");
+//
+//            startActivity(mapIntent);
+//        }
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+        mapIntent.setData(Uri.parse("geo:37.7749,-122.4194"));
+        startActivity(mapIntent);
+
+        Log.d(TAG, "onclickButton4: calling Map End");
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

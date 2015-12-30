@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import java.util.concurrent.TimeUnit;
 
 public class ThirdActivity extends Activity {
 
@@ -54,7 +57,7 @@ public class ThirdActivity extends Activity {
         Log.d(TAG, "onDestroy()");
     }
 
-    public void onclickButton3(View view) {
+    public void onClickButton3(View view) {
 
         Log.d(TAG, "onclickButton3: calling Dialer");
         Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -63,7 +66,7 @@ public class ThirdActivity extends Activity {
 
     }
 
-    public void onclickButton4(View view) {
+    public void onClickButton4(View view) {
 
         Log.d(TAG, "onclickButton4: calling Map");
 
@@ -82,6 +85,35 @@ public class ThirdActivity extends Activity {
         startActivity(mapIntent);
 
         Log.d(TAG, "onclickButton4: calling Map End");
+    }
+
+
+    public void onClickButton5(View view) {
+
+        Log.d(TAG, "onclickButton5: calling Thread start");
+
+        final Runnable runnableSleep = new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG, "onclickButton5: Inside Thread start");
+
+                try {
+                    TimeUnit.SECONDS.sleep(4);
+                } catch (InterruptedException e) {
+                    Log.d(TAG, "onclickButton5: Error when sleeping");
+                    e.printStackTrace();
+                }
+
+                // After finishing send a message to UI
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Thread finished", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        };
+        new Thread(runnableSleep).start();
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package test.com.testactivities;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Handler;
@@ -149,6 +150,51 @@ public class ThirdActivity extends Activity {
         };
         new Thread(runnableSleep).start();
 
+    }
+
+
+    private class TestAsyncTask extends AsyncTask<Void, Void, Integer> {
+
+        final String TAG_2 = "TEST_ASYNC_TASK";
+        Integer sleep;
+
+        private TestAsyncTask (Integer sleep) {
+            this.sleep = sleep;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Log.d(TAG, "onPreExecute method");
+        }
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            Log.d(TAG, "doInBackground method");
+
+            try {
+                TimeUnit.SECONDS.sleep(sleep);
+            } catch (InterruptedException e) {
+                Log.d(TAG, "onclickButton6: Error when sleeping");
+                e.printStackTrace();
+            }
+
+            return sleep;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            String string = "Async Task finished with " + result.toString() + " seconds.";
+            Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    public void onClickButton7(View view) {
+
+        Log.d(TAG, "onclickButton7: calling Async Task");
+
+        TestAsyncTask test = new TestAsyncTask(4);
+        test.execute();
     }
 
 

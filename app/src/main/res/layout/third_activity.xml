@@ -15,30 +15,41 @@
         android:layout_height="wrap_content"
         android:text="Launch Dialer"
         android:id="@+id/button3"
+        android:layout_marginTop="41dp"
+        android:onClick="onClickButton3"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="96dp"
-        android:onClick="onClickButton3"/>
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Launch Maps"
         android:id="@+id/button4"
-        android:layout_centerVertical="true"
+        android:onClick="onClickButton4"
+        android:layout_below="@+id/button3"
         android:layout_alignLeft="@+id/button3"
         android:layout_alignStart="@+id/button3"
-        android:onClick="onClickButton4"/>
+        android:layout_marginTop="35dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Thread button"
         android:id="@+id/button5"
-        android:layout_marginBottom="78dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/button4"
-        android:layout_alignEnd="@+id/button4"
-        android:onClick="onClickButton5" />
+        android:onClick="onClickButton5"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/button3"
+        android:layout_alignEnd="@+id/button3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thread button 2"
+        android:id="@+id/button6"
+        android:layout_below="@+id/button5"
+        android:layout_alignLeft="@+id/button5"
+        android:layout_alignStart="@+id/button5"
+        android:layout_marginTop="53dp"
+        android:onClick="onClickButton6" />
 
 </RelativeLayout>

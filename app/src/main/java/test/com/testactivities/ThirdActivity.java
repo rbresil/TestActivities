@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -106,6 +108,7 @@ public class ThirdActivity extends Activity {
 
                 // After finishing send a message to UI
                 runOnUiThread(new Runnable() {
+                    @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(), "Thread finished", Toast.LENGTH_LONG).show();
                     }
@@ -115,6 +118,39 @@ public class ThirdActivity extends Activity {
         new Thread(runnableSleep).start();
 
     }
+
+
+    public void onClickButton6(View view) {
+
+        Log.d(TAG, "onclickButton6: calling Thread start 2");
+
+        final Runnable runnableSleep = new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG, "onclickButton6: Inside Thread start 2");
+
+                try {
+                    TimeUnit.SECONDS.sleep(4);
+                } catch (InterruptedException e) {
+                    Log.d(TAG, "onclickButton6: Error when sleeping");
+                    e.printStackTrace();
+                }
+
+                // After finishing send a message to UI
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Thread finished 2", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            }
+        };
+        new Thread(runnableSleep).start();
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
